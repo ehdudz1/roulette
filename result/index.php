@@ -1,4 +1,4 @@
-<?php include_once($_SERVER['DOCUMENT_ROOT']."/inc/header.php"); ?>
+<?php include_once("../inc/header.php"); ?>
 <!--
     Winhweel.js basic code wheel example by Douglas McKechie @ www.dougtesting.net
     See website for tutorials and other documentation.
@@ -25,69 +25,104 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
 -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        // startSpin();
+    });
+</script>
 <script type="text/javascript" src="./Winwheel.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
         <div class="modal modal-signin position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin" style="height: 100vh;">
-            <div align="center">
-                <!-- <h1>Winwheel.js example wheel - basic code wheel</h1>
-                <p>Here is an example of a basic code drawn wheel which spins to a stop with the prize won alerted to the user.</p>
-                <br />
-                <p>Choose a power setting then press the Spin button. You will be alerted to the prize won when the spinning stops.</p>
-                <br /> -->
-                <table cellpadding="0" cellspacing="0" border="0">
-                    <tr>
-                        <td>
-                            <div class="power_controls">
-                                <br />
-                                <br />
-                                <table class="power" cellpadding="10" cellspacing="0">
-                                    <tr>
-                                        <th align="center">Power</th>
-                                    </tr>
-                                    <tr>
-                                        <td width="78" align="center" id="pw3" onClick="powerSelected(3);">High</td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center" id="pw2" onClick="powerSelected(2);">Med</td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center" id="pw1" onClick="powerSelected(1);">Low</td>
-                                    </tr>
-                                </table>
-                                <br />
-                                <img id="spin_button" src="spin_off.png" alt="Spin" onClick="startSpin();" />
-                                <br /><br />
-                                &nbsp;&nbsp;<a href="#" onClick="resetWheel(); return false;">Play Again</a><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(reset)
-                            </div>
-                        </td>
-                        <td width="438" height="582" class="" align="center" valign="center">
-                            <div id="Pointer"><span onmouseover="pointer_guide(true)" onmouseleave="pointer_guide(false)">▼</span></div>
-                            <canvas id="canvas" width="434" height="434">
-                                <p style="{color: white}" align="center">Sorry, your browser doesn't support canvas. Please try another.</p>
-                            </canvas>
-                        </td>
-                    </tr>
-                </table>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content rounded-4 shadow">
+                    <div class="modal-body p-5">
+                        <div id="Pointer" style="text-align:center;">
+                            <span onmouseover="pointer_guide(true)" onmouseleave="pointer_guide(false)">▼</span>
+                        </div>
+                        <canvas id="canvas" width="434" height="434" style="display: inline-block;width: 100%;height: 100%;">
+                            <p style="{color: white}" align="center">Sorry, your browser doesn't support canvas. Please try another.</p>
+                        </canvas>
+
+                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="button" onClick="startSpin();$(this).addClass('disabled')" style="margin-top: 5px;">돌리기</button>
+                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="button" onClick="resetWheel();">다시돌리기</button>
+                        <a href="../" class="w-100 mb-2 btn btn-lg rounded-3 btn-primary">처음으로</a>
+                    </div>
+
+                    <!-- <h1>Winwheel.js example wheel - basic code wheel</h1>
+                    <p>Here is an example of a basic code drawn wheel which spins to a stop with the prize won alerted to the user.</p>
+                    <br />
+                    <p>Choose a power setting then press the Spin button. You will be alerted to the prize won when the spinning stops.</p>
+                    <br /> -->
+                    <!-- <table cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <td>
+                                <div class="power_controls">
+                                    <br />
+                                    <br />
+                                    <table class="power" cellpadding="10" cellspacing="0">
+                                        <tr>
+                                            <th align="center">Power</th>
+                                        </tr>
+                                        <tr>
+                                            <td>High
+                                                <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="button" id="pw3" onClick="powerSelected(3);"></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Med
+                                                <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="button" id="pw2" onClick="powerSelected(2);"></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Low
+                                                <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="button" id="pw1" onClick="powerSelected(1);"></button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br />
+                                    <img id="spin_button" src="spin_off.png" alt="Spin" onClick="startSpin();" />
+                                    <br /><br />
+                                    &nbsp;&nbsp;<a href="#" onClick="resetWheel(); return false;">Play Again</a><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(reset)
+                                </div>
+                            </td>
+                            <td width="438" height="582" class="" align="center" valign="center">
+                                <div id="Pointer"><span onmouseover="pointer_guide(true)" onmouseleave="pointer_guide(false)">▼</span></div>
+                                <canvas id="canvas" width="434" height="434">
+                                    <p style="{color: white}" align="center">Sorry, your browser doesn't support canvas. Please try another.</p>
+                                </canvas>
+                            </td>
+                        </tr>
+                    </table> -->
+                </div>
             </div>
         </div>
 
         <script>
             // Create new wheel object specifying the parameters at creation time.
+
+            // Define segments including colour and text.
+            let segments_tmp = JSON.parse(window.localStorage.getItem('r_items'));
+            let segments_arr = new Array();
+            let segments_color = ['red','yellow','blue','green','orange','purple','skyblue','pink','gray'];
+
+            segments_tmp.forEach(function (item, index, array) {
+                // color array를 미리생성 후 룰렛을생성할때 랜덤으로 뽑아옴
+                segments_color.sort(()=> Math.random() - 0.5);
+
+                let segments_item = {
+                    'fillStyle' : segments_color.pop(), 'text' : item
+                }
+                segments_arr.push(segments_item);
+            })
+
+console.log(segments_color);
+console.log(segments_arr);
+
             let theWheel = new Winwheel({
-                'numSegments'  : 3,     // Specify number of segments.
+                'numSegments'  : segments_arr.length,     // Specify number of segments.
                 'outerRadius'  : 212,   // Set outer radius so wheel fits inside the background.
                 'textFontSize' : 28,    // Set font size as desired.
-                'segments'     :        // Define segments including colour and text.
-                [
-                   {'fillStyle' : '#eae56f', 'text' : 'Prize 1'},
-                   {'fillStyle' : '#89f26e', 'text' : 'Prize 2'},
-                   {'fillStyle' : '#7de6ef', 'text' : 'Prize 3'},
-                   // {'fillStyle' : '#e7706f', 'text' : 'Prize 4'},
-                   // {'fillStyle' : '#eae56f', 'text' : 'Prize 5'},
-                   // {'fillStyle' : '#89f26e', 'text' : 'Prize 6'},
-                   // {'fillStyle' : '#7de6ef', 'text' : 'Prize 7'},
-                   // {'fillStyle' : '#e7706f', 'text' : 'Prize 8'}
-                ],
+                'segments'     : segments_arr,
                 'animation' :           // Specify the animation to use.
                 {
                     'type'     : 'spinToStop',
@@ -129,8 +164,8 @@
                     wheelPower = powerLevel;
 
                     // Light up the spin button by changing it's source image and adding a clickable class to it.
-                    document.getElementById('spin_button').src = "spin_on.png";
-                    document.getElementById('spin_button').className = "clickable";
+                    // document.getElementById('spin_button').src = "spin_on.png";
+                    // document.getElementById('spin_button').className = "clickable";
                 }
             }
 
@@ -152,8 +187,8 @@
                     }
 
                     // Disable the spin button so can't click again while wheel is spinning.
-                    document.getElementById('spin_button').src       = "spin_off.png";
-                    document.getElementById('spin_button').className = "";
+                    // document.getElementById('spin_button').src       = "spin_off.png";
+                    // document.getElementById('spin_button').className = "";
 
                     // Begin the spin animation by calling startAnimation on the wheel object.
                     theWheel.startAnimation();
@@ -173,9 +208,9 @@
                 theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
                 theWheel.draw();                // Call draw to render changes to the wheel.
 
-                document.getElementById('pw1').className = "";  // Remove all colours from the power level indicators.
-                document.getElementById('pw2').className = "";
-                document.getElementById('pw3').className = "";
+                // document.getElementById('pw1').className = "";  // Remove all colours from the power level indicators.
+                // document.getElementById('pw2').className = "";
+                // document.getElementById('pw3').className = "";
 
                 wheelSpinning = false;          // Reset to false to power buttons and spin can be clicked again.
             }
@@ -190,4 +225,4 @@
                 alert("You have won " + indicatedSegment.text);
             }
         </script>
-<?php include_once($_SERVER['DOCUMENT_ROOT']."/inc/footer.php"); ?>
+<?php include_once("../inc/footer.php"); ?>
