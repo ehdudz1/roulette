@@ -35,7 +35,6 @@
                             항목추가
                         </button>
                         <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" id="submit-btn" type="button">만들기</button>
-                        <input type="color" name="" value="">
                     </form>
                     </div>
                 </div>
