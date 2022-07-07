@@ -1,27 +1,22 @@
-<?php include_once("./inc/header.php"); ?>
-<script src="./lib/js/Roulette.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        const roulette = new Roulette();
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>룰렛 만들기</title>
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-        $('#submit-btn').on("click", function(){
-            roulette.rSubmit('submit');
-        });
-
-        $('#add-btn').on("click", function(){
-            roulette.addItem();
-        });
-
-        $(document).on("click", '.del-btn', function() {
-            roulette.delItem(this);
-        });
-    });
-</script>
+        <script src="./lib/js/Roulette.js"></script>
+    </head>
+    <body>
         <div class="modal modal-signin position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin" style="height: 100vh;">
             <div class="modal-dialog" role="document">
                 <div class="modal-content rounded-4 shadow">
-                    <div class="modal-header p-5 pb-4 border-bottom-0">
-                        <h2 class="fw-bold mb-0">룰렛 생성기</h2>
+                    <div class="modal-header p-5 pb-4 border-bottom-0" style="display: block;">
+                        <h2 class="fw-bold mb-0" style="text-align: center!important;">룰렛 만들기</h2>
                     </div>
                     <div class="modal-body p-5 pt-0">
                     <form id="roulette-form" method="post">
@@ -39,10 +34,29 @@
                             </svg>
                             항목추가
                         </button>
-                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" id="submit-btn" type="button">생성하기</button>
+                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" id="submit-btn" type="button">만들기</button>
+                        <input type="color" name="" value="">
                     </form>
                     </div>
                 </div>
             </div>
         </div>
-<?php include_once("./inc/footer.php"); ?>
+    </body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        const roulette = new Roulette();
+
+        $('#submit-btn').on("click", function(){
+            roulette.rSubmit('submit');
+        });
+
+        $('#add-btn').on("click", function(){
+            roulette.addItem();
+        });
+
+        $(document).on("click", '.del-btn', function() {
+            roulette.delItem(this);
+        });
+    });
+</script>
